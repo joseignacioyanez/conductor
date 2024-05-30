@@ -166,7 +166,7 @@ public class PostgresQueueListener {
                 conn.setAutoCommit(previousAutoCommitMode);
             }
         } catch (SQLException e) {
-            if (!e.getSQLState().equals("08003")) {
+            if (!"08003".equals(e.getSQLState())) {
                 logger.error("Error fetching notifications {}", e.getSQLState());
             }
             connect();

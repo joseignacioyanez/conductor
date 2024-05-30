@@ -41,7 +41,7 @@ public class RedisQueuesShardingStrategyProvider {
 
     public ShardingStrategy get() {
         String shardingStrat = properties.getQueueShardingStrategy();
-        if (shardingStrat.equals(LOCAL_ONLY_STRATEGY)) {
+        if (LOCAL_ONLY_STRATEGY.equals(shardingStrat)) {
             LOGGER.info(
                     "Using {} sharding strategy for queues",
                     LocalOnlyStrategy.class.getSimpleName());

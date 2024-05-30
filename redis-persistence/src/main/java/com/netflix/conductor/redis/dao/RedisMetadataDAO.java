@@ -219,7 +219,7 @@ public class RedisMetadataDAO extends BaseDynoDAO implements MetadataDAO {
         Map<String, String> workflowDefs = jedisProxy.hgetAll(nsKey(WORKFLOW_DEF, name));
         int size = 0;
         for (String key : workflowDefs.keySet()) {
-            if (key.equals(LATEST)) {
+            if (LATEST.equals(key)) {
                 continue;
             }
             String workflowDef = workflowDefs.get(key);
@@ -287,7 +287,7 @@ public class RedisMetadataDAO extends BaseDynoDAO implements MetadataDAO {
         for (String wfName : wfNames) {
             Map<String, String> workflowDefs = jedisProxy.hgetAll(nsKey(WORKFLOW_DEF, wfName));
             for (String key : workflowDefs.keySet()) {
-                if (key.equals(LATEST)) {
+                if (LATEST.equals(key)) {
                     continue;
                 }
                 String workflowDef = workflowDefs.get(key);

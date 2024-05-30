@@ -1462,7 +1462,7 @@ public class WorkflowExecutor {
                 .findFirst()
                 .map(PollData::getDomain)
                 .orElse(
-                        domains[domains.length - 1].trim().equalsIgnoreCase("NO_DOMAIN")
+                        "NO_DOMAIN".equalsIgnoreCase(domains[domains.length - 1].trim())
                                 ? null
                                 : domains[domains.length - 1].trim());
     }

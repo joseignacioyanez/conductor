@@ -81,11 +81,11 @@ public class PostgresIndexQueryBuilder {
         }
 
         public String getQueryFragment() {
-            if (operator.equals("IN")) {
+            if ("IN".equals(operator)) {
                 return attribute + " = ANY(?)";
-            } else if (operator.equals("@@")) {
+            } else if ("@@".equals(operator)) {
                 return attribute + " @@ to_tsquery(?)";
-            } else if (operator.equals("@>")) {
+            } else if ("@>".equals(operator)) {
                 return attribute + " @> ?::JSONB";
             } else {
                 if (attribute.endsWith("_time")) {
@@ -97,7 +97,7 @@ public class PostgresIndexQueryBuilder {
         }
 
         private String getOperator(String op) {
-            if (op.equals("IN") && values.size() == 1) {
+            if ("IN".equals(op) && values.size() == 1) {
                 return "=";
             }
             return op;
@@ -192,7 +192,7 @@ public class PostgresIndexQueryBuilder {
     }
 
     private void parseFreeText(String freeText) {
-        if (!StringUtils.isEmpty(freeText) && !freeText.equals("*")) {
+        if (!StringUtils.isEmpty(freeText) && !"*".equals(freeText)) {
             if (allowJsonQueries && freeText.startsWith("{") && freeText.endsWith("}")) {
                 Condition cond = new Condition();
                 cond.setAttribute("json_data");
