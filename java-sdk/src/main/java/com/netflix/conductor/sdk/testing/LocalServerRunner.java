@@ -12,6 +12,8 @@
  */
 package com.netflix.conductor.sdk.testing;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -151,7 +153,7 @@ public class LocalServerRunner {
         String tempDir = System.getProperty("java.io.tmpdir");
         Path serverFile = Paths.get(tempDir, "conductor-server.jar");
         if (!Files.exists(serverFile)) {
-            Files.copy(new URL(repositoryURL).openStream(), serverFile);
+            Files.copy(Urls.create(repositoryURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream(), serverFile);
         }
 
         String command =
