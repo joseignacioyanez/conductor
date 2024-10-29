@@ -12,6 +12,7 @@
  */
 package com.netflix.conductor.es6.dao.index;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,7 +64,7 @@ abstract class ElasticSearchRestDaoBaseTest extends ElasticSearchTest {
         BufferedReader bufferedReader = new BufferedReader(streamReader);
 
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
             String[] fields = line.split("\\s");
             String endpoint = String.format("/%s", fields[2]);
 

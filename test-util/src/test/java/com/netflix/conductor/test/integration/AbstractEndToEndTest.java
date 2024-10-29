@@ -12,6 +12,7 @@
  */
 package com.netflix.conductor.test.integration;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -95,7 +96,7 @@ public abstract class AbstractEndToEndTest {
         BufferedReader bufferedReader = new BufferedReader(streamReader);
 
         String line;
-        while ((line = bufferedReader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
             String[] fields = line.split("\\s");
             String endpoint = String.format("/%s", fields[2]);
 
