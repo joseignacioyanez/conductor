@@ -13,6 +13,7 @@
 package com.netflix.conductor.sdk.example.shipment;
 
 import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.util.*;
 
 import com.netflix.conductor.sdk.workflow.def.tasks.DynamicForkInput;
@@ -48,7 +49,7 @@ public class ShipmentWorkers {
 
     @WorkerTask(value = "get_order_details", threadCount = 5)
     public List<Order> getOrderDetails(@InputParam("orderNo") String orderNo) {
-        int lineItemCount = new Random().nextInt(10);
+        int lineItemCount = new SecureRandom().nextInt(10);
         List<Order> orderDetails = new ArrayList<>();
         for (int i = 0; i < lineItemCount; i++) {
             Order orderDetail = new Order(orderNo, "sku_" + i, 2, BigDecimal.valueOf(20.5));
