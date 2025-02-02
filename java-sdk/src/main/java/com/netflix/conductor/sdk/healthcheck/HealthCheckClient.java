@@ -12,6 +12,7 @@
  */
 package com.netflix.conductor.sdk.healthcheck;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -39,7 +40,7 @@ public class HealthCheckClient {
                     new BufferedReader(new InputStreamReader(new URL(healthCheckURL).openStream()));
             StringBuilder response = new StringBuilder();
             String inputLine;
-            while ((inputLine = in.readLine()) != null) {
+            while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 response.append(inputLine);
             }
             in.close();
