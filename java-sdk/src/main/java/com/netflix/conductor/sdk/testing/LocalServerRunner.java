@@ -12,6 +12,7 @@
  */
 package com.netflix.conductor.sdk.testing;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -163,7 +164,7 @@ public class LocalServerRunner {
                         + serverFile;
         LOGGER.info("Running command {}", command);
 
-        serverProcess = Runtime.getRuntime().exec(new String[] {"bash", "-l", "-c", command});
+        serverProcess = SystemCommand.runCommand(Runtime.getRuntime(), new String[] {"bash", "-l", "-c", command});
         BufferedReader error =
                 new BufferedReader(new InputStreamReader(serverProcess.getErrorStream()));
         BufferedReader op =
