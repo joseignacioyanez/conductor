@@ -12,6 +12,7 @@
  */
 package com.netflix.conductor.sdk.testing;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -177,7 +178,7 @@ public class LocalServerRunner {
                             String line = null;
                             while (true) {
                                 try {
-                                    if ((line = error.readLine()) == null) break;
+                                    if ((line = BoundedLineReader.readLine(error, 5_000_000)) == null) break;
                                 } catch (IOException e) {
                                     LOGGER.error("Exception reading input stream:", e);
                                 }
@@ -194,7 +195,7 @@ public class LocalServerRunner {
                             String line = null;
                             while (true) {
                                 try {
-                                    if ((line = op.readLine()) == null) break;
+                                    if ((line = BoundedLineReader.readLine(op, 5_000_000)) == null) break;
                                 } catch (IOException e) {
                                     LOGGER.error("Exception reading input stream:", e);
                                 }
