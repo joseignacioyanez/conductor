@@ -12,6 +12,8 @@
  */
 package com.netflix.conductor.sdk.healthcheck;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -36,7 +38,7 @@ public class HealthCheckClient {
         try {
 
             BufferedReader in =
-                    new BufferedReader(new InputStreamReader(new URL(healthCheckURL).openStream()));
+                    new BufferedReader(new InputStreamReader(Urls.create(healthCheckURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream()));
             StringBuilder response = new StringBuilder();
             String inputLine;
             while ((inputLine = in.readLine()) != null) {

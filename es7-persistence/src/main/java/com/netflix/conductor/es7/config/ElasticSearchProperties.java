@@ -12,6 +12,8 @@
  */
 package com.netflix.conductor.es7.config;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -220,7 +222,7 @@ public class ElasticSearchProperties {
 
     private URL toURL(String url) {
         try {
-            return new URL(url);
+            return Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException(url + "can not be converted to java.net.URL");
         }
