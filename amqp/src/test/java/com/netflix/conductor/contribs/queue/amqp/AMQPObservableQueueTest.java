@@ -13,6 +13,7 @@
 package com.netflix.conductor.contribs.queue.amqp;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -357,7 +358,7 @@ public class AMQPObservableQueueTest {
         // Mock channel and connection
         Channel channel = mockBaseChannel();
         Connection connection = mockGoodConnection(channel);
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String name = RandomStringUtils.randomAlphabetic(30),
                 type = "topic",
@@ -396,7 +397,7 @@ public class AMQPObservableQueueTest {
             Channel channel, Connection connection, boolean exists, boolean useWorkingChannel)
             throws IOException, TimeoutException {
 
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String name = RandomStringUtils.randomAlphabetic(30),
                 type = "topic",
@@ -491,7 +492,7 @@ public class AMQPObservableQueueTest {
             boolean autoDelete)
             throws IOException, TimeoutException {
 
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String name = RandomStringUtils.randomAlphabetic(30),
                 type = "topic",
@@ -597,7 +598,7 @@ public class AMQPObservableQueueTest {
     private void testPublishMessagesToExchangeAndDefaultConfiguration(
             Channel channel, Connection connection, boolean exists, boolean useWorkingChannel)
             throws IOException, TimeoutException {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String name = RandomStringUtils.randomAlphabetic(30),
                 type = "topic",
@@ -791,7 +792,7 @@ public class AMQPObservableQueueTest {
     private void testGetMessagesFromQueueAndDefaultConfiguration(
             Channel channel, Connection connection, boolean queueExists, boolean useWorkingChannel)
             throws IOException, TimeoutException {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String queueName = RandomStringUtils.randomAlphabetic(30);
         AMQPSettings settings = new AMQPSettings(properties).fromURI("amqp_queue:" + queueName);
@@ -823,7 +824,7 @@ public class AMQPObservableQueueTest {
     private void testGetMessagesFromQueueAndDefaultConfiguration_close(
             Channel channel, Connection connection, boolean queueExists, boolean useWorkingChannel)
             throws IOException, TimeoutException {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String queueName = RandomStringUtils.randomAlphabetic(30);
         AMQPSettings settings = new AMQPSettings(properties).fromURI("amqp_queue:" + queueName);
@@ -853,7 +854,7 @@ public class AMQPObservableQueueTest {
     private void testPublishMessagesToQueueAndDefaultConfiguration(
             Channel channel, Connection connection, boolean queueExists, boolean useWorkingChannel)
             throws IOException, TimeoutException {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final String queueName = RandomStringUtils.randomAlphabetic(30);
         final AMQPSettings settings =

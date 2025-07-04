@@ -12,6 +12,7 @@
  */
 package com.netflix.conductor.core.reconciliation;
 
+import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.Random;
@@ -175,7 +176,7 @@ public class WorkflowSweeper {
     @VisibleForTesting
     long workflowOffsetWithJitter(long workflowOffsetTimeout) {
         long range = workflowOffsetTimeout / 3;
-        long jitter = new Random().nextInt((int) (2 * range + 1)) - range;
+        long jitter = new SecureRandom().nextInt((int) (2 * range + 1)) - range;
         return workflowOffsetTimeout + jitter;
     }
 }
